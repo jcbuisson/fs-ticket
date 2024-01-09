@@ -6,6 +6,14 @@
          <label class="block mt-4 text-sm font-medium text-gray-700">Email</label>
          <input v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full" />
          
+         <!-- Category Level Select -->
+         <label class="block mt-4 text-sm font-medium text-gray-700">Catégorie</label>
+         <select v-model="formData.category" class="mt-1 p-2 border rounded-md w-full">
+            <option value="furniture">Mobilier</option>
+            <option value="computer">Informatique</option>
+            <option value="other">Autre</option>
+         </select>
+
          <!-- Textarea -->
          <label class="block mt-4 text-sm font-medium text-gray-700">Description</label>
          <textarea v-model="formData.description" class="mt-1 p-2 border rounded-md w-full"></textarea>
@@ -31,8 +39,9 @@ import { ref } from 'vue'
 
 const formData = ref({
    email: '',
+   category: null,
    description: '',
-   priority: 'normal',
+   priority: null,
 })
 
 const submitForm = () => {
