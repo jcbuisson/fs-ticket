@@ -2,14 +2,9 @@
    <div class="max-w-md mx-auto mt-8">
       <form @submit.prevent="submitForm">
 
-         <!-- Email Input -->
-         <label class="block mt-4 text-sm font-medium text-gray-700">Email</label>
-         <input v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full" />
-         <div v-if="!isEmailValid" class="text-red-500 text-sm mt-1">Entrez une adresse mail valide</div>
-
          <!-- Email Input version 2 -->
          <label class="block mt-4 text-sm font-medium text-gray-700">Email</label>
-         <input ref="iemail" v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full" />
+         <input ref="emailRef" v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full invalid:border-red-500 invalid:border-2 invalid:border-dashed" />
          <div v-if="!isEmailValid2" class="text-red-500 text-sm mt-1">Entrez une adresse mail valide</div>
 
          <!-- Category Level Select -->
@@ -21,10 +16,10 @@
          </select>
          <div v-if="!isCategoryValid" class="text-red-500 text-sm mt-1">Choisissez la catégorie</div>
 
-         <!-- Description Textarea -->
+         <!-- Description Textarea, version 2 -->
          <label class="block mt-4 text-sm font-medium text-gray-700">Description</label>
-         <textarea v-model="formData.description" class="mt-1 p-2 border rounded-md w-full"></textarea>
-         <div v-if="!isDescriptionValid" class="text-red-500 text-sm mt-1">La description ne doit pas être vide</div>
+         <textarea ref="descriptionRef" v-model="formData.description" class="mt-1 p-2 border rounded-md w-full invalid:border-red-500 invalid:border-2 invalid:border-dashed" required></textarea>
+         <div v-if="!isDescriptionValid2" class="text-red-500 text-sm mt-1">La description ne doit pas être vide</div>
 
          <!-- Priority Select -->
          <label class="block mt-4 text-sm font-medium text-gray-700">Priorité</label>
@@ -40,8 +35,6 @@
             Valider
          </button>
       </form>
-
-      {{ iemail && iemail.validity.valid }}
    </div>
 </template>
 
@@ -59,22 +52,14 @@ const submitForm = () => {
    console.log('Form submitted with data:', formData.value)
 }
 
-const isEmailValid = computed(() => {
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-   return emailRegex.test(formData.value.email)
-})
+const emailRef = ref(null)
+const descriptionRef = ref(null)
+
+const isEmailValid = computed(() => emailRef.value && emailRef.value.validity.valid)
 const isCategoryValid = computed(() => !!formData.value.category)
-const isDescriptionValid = computed(() => formData.value.description.length > 0)
+const isDescriptionValid = computed(() => descriptionRef.value && descriptionRef.value.validity.valid)
 const isPriorityValid = computed(() => !!formData.value.priority)
+
 const isFormValid = computed(() => isEmailValid.value && isCategoryValid.value && isDescriptionValid.value && isPriorityValid.value)
 
-const iemail = ref(null)
-const isEmailValid2 = computed(() => iemail.value && iemail.value.validity.valid)
-
 </script>
-
-<style>
-input:invalid {
-  border: 2px dashed red;
-}
-</style>
