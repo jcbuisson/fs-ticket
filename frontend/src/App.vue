@@ -62,11 +62,12 @@ const submitForm = async () => {
 }
 
 const isEmailValid = computed(() => {
-   const emailRegex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+   if (!formData.value) return false
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
    return emailRegex.test(formData.value.email)
 })
 const isCategoryValid = computed(() => !!formData.value.category)
-const isDescriptionValid = computed(() => formData.value.description.length > 0)
+const isDescriptionValid = computed(() => formData.value.description && formData.value.description.length > 0)
 const isPriorityValid = computed(() => !!formData.value.priority)
 
 const isFormValid = computed(() => isEmailValid.value && isCategoryValid.value && isDescriptionValid.value && isPriorityValid.value)
