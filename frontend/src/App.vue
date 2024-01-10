@@ -7,6 +7,11 @@
          <input v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full" />
          <div v-if="!isEmailValid" class="text-red-500 text-sm mt-1">Entrez une adresse mail valide</div>
 
+         <!-- Email Input version 2 -->
+         <label class="block mt-4 text-sm font-medium text-gray-700">Email</label>
+         <input ref="iemail" v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full" />
+         <div v-if="!isEmailValid2" class="text-red-500 text-sm mt-1">Entrez une adresse mail valide</div>
+
          <!-- Category Level Select -->
          <label class="block mt-4 text-sm font-medium text-gray-700">Catégorie</label>
          <select v-model="formData.category" class="mt-1 p-2 border rounded-md w-full">
@@ -35,6 +40,8 @@
             Valider
          </button>
       </form>
+
+      {{ iemail && iemail.validity.valid }}
    </div>
 </template>
 
@@ -61,4 +68,13 @@ const isDescriptionValid = computed(() => formData.value.description.length > 0)
 const isPriorityValid = computed(() => !!formData.value.priority)
 const isFormValid = computed(() => isEmailValid.value && isCategoryValid.value && isDescriptionValid.value && isPriorityValid.value)
 
+const iemail = ref(null)
+const isEmailValid2 = computed(() => iemail.value && iemail.value.validity.valid)
+
 </script>
+
+<style>
+input:invalid {
+  border: 2px dashed red;
+}
+</style>
