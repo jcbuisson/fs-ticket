@@ -31,7 +31,7 @@
          <div v-if="!isPriorityValid" class="text-red-500 text-sm mt-1">Choisissez la priorité</div>
 
          <!-- Submit Button -->
-         <button type="submit" :disabled="!isFormValid" class="mt-4 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+         <button type="submit" :disabled="!isFormValid" class="mt-4 p-2 bg-blue-500 text-white rounded-md hover:valid:bg-blue-600" :class="{ 'bg-red-500' : !isFormValid}">
             Valider
          </button>
       </form>
@@ -59,6 +59,12 @@ const isEmailValid = computed(() => {
 const isCategoryValid = computed(() => !!formData.value.category)
 const isDescriptionValid = computed(() => formData.value.description.length > 0)
 const isPriorityValid = computed(() => !!formData.value.priority)
-const isFormValid = computed(() => isEmailValid.value && isCategoryValid.value && isDescriptionValid.value && isPriorityValid.value)
 
+const isFormValid = computed(() => isEmailValid.value && isCategoryValid.value && isDescriptionValid.value && isPriorityValid.value)
 </script>
+
+<style>
+input:invalid {
+  border: 2px dashed red;
+}
+</style>
