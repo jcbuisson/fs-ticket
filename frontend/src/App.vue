@@ -38,9 +38,9 @@
 import { ref } from 'vue'
 
 const formData = ref({
-   email: '',
+   email: null,
    category: null,
-   description: '',
+   description: null,
    priority: null,
 })
 
