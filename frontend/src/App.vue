@@ -12,6 +12,10 @@
             <option value="furniture">Mobilier</option>
             <option value="computer">Informatique</option>
             <option value="other">Autre</option>
+
+            <!-- <option v-for="option in OPTIONS" :value="option.value">
+               {{ option.text }}
+            </option> -->
          </select>
 
          <!-- Textarea -->
@@ -41,8 +45,15 @@ const formData = ref({
    email: null,
    category: null,
    description: null,
-   priority: null,
+   priority: 'low',
 })
+// const formData = ref({})
+
+// const OPTIONS = [
+//    { value: 'furniture', text: 'Mobilier'},
+//    { value: 'computer', text: 'Informatique'},
+//    { value: 'other', text: 'Autre'},
+// ]
 
 const submitForm = () => {
    console.log('Form submitted with data:', formData.value)
