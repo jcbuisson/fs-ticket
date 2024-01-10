@@ -5,7 +5,7 @@
          <!-- Email Input -->
          <label class="block mt-4 text-sm font-medium text-gray-700">Email</label>
          <input v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full" />
-         <div v-if="!isEmailValid" class="text-red-500 text-sm mt-1">Entrez une adresse mail valide</div>
+         <!-- <div v-if="!isEmailValid" class="text-red-500 text-sm mt-1">Entrez une adresse mail valide</div> -->
 
          <!-- Category Level Select -->
          <label class="block mt-4 text-sm font-medium text-gray-700">Catégorie</label>
@@ -31,7 +31,7 @@
          <div v-if="!isPriorityValid" class="text-red-500 text-sm mt-1">Choisissez la priorité</div>
 
          <!-- Submit Button -->
-         <button type="submit" :disabled="!isFormValid" class="mt-4 p-2 bg-blue-500 text-white rounded-md hover:valid:bg-blue-600" :class="{ 'bg-red-500' : !isFormValid}">
+         <button type="submit" :ddisabled="!isFormValid" class="mt-4 p-2 bg-blue-500 text-white rounded-md hover:valid:bg-blue-600" :class="{ 'bg-red-500' : !isFormValid}">
             Valider
          </button>
       </form>
