@@ -7,11 +7,6 @@
          <input v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full" />
          <div v-if="!isEmailValid" class="text-red-500 text-sm mt-1">Entrez une adresse mail valide</div>
 
-         <!-- Email Input version 2 -->
-         <label class="block mt-4 text-sm font-medium text-gray-700">Email</label>
-         <input ref="iemail" v-model="formData.email" type="email" class="mt-1 p-2 border rounded-md w-full" />
-         <div v-if="!isEmailValid2" class="text-red-500 text-sm mt-1">Entrez une adresse mail valide</div>
-
          <!-- Category Level Select -->
          <label class="block mt-4 text-sm font-medium text-gray-700">Catégorie</label>
          <select v-model="formData.category" class="mt-1 p-2 border rounded-md w-full">
@@ -36,12 +31,10 @@
          <div v-if="!isPriorityValid" class="text-red-500 text-sm mt-1">Choisissez la priorité</div>
 
          <!-- Submit Button -->
-         <button type="submit" :disabled="!isFormValid" class="mt-4 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+         <button type="submit" :disabled="!isFormValid" class="mt-4 p-2 bg-blue-500 text-white rounded-md hover:valid:bg-blue-600" :class="{ 'bg-red-500' : !isFormValid}">
             Valider
          </button>
       </form>
-
-      {{ iemail && iemail.validity.valid }}
    </div>
 </template>
 
@@ -66,11 +59,8 @@ const isEmailValid = computed(() => {
 const isCategoryValid = computed(() => !!formData.value.category)
 const isDescriptionValid = computed(() => formData.value.description.length > 0)
 const isPriorityValid = computed(() => !!formData.value.priority)
+
 const isFormValid = computed(() => isEmailValid.value && isCategoryValid.value && isDescriptionValid.value && isPriorityValid.value)
-
-const iemail = ref(null)
-const isEmailValid2 = computed(() => iemail.value && iemail.value.validity.valid)
-
 </script>
 
 <style>
