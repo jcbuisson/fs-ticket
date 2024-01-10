@@ -48,8 +48,17 @@ const formData = ref({
    priority: null,
 })
 
-const submitForm = () => {
+const submitForm = async () => {
    console.log('Form submitted with data:', formData.value)
+   const response = await fetch('/api/ticket', {
+      method: 'POST',
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData.value),
+   })
+   const createdTicket = await response.json()
+   console.log('createdTicket', createdTicket)
 }
 
 const isEmailValid = computed(() => {
