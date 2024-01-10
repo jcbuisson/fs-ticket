@@ -9,6 +9,7 @@ app.use(express.json())
 
 app.get('/api/ticket', async (req, res) => {
    const ticketList = await prisma.Ticket.findMany({})
+   console.log('ticketList', ticketList)
    res.send(ticketList)
 })
 
