@@ -53,7 +53,7 @@ const submitForm = () => {
 }
 
 const isEmailValid = computed(() => {
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+   const emailRegex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
    return emailRegex.test(formData.value.email)
 })
 const isCategoryValid = computed(() => !!formData.value.category)
