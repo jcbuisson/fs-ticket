@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 export default defineConfig(({ command, mode }) => {
    return {
       plugins: [
+         vue(),
       ],
       server: {
          port: 8000,
