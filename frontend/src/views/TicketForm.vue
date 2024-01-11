@@ -42,7 +42,7 @@ import router from '/src/router'
 const formData = ref({
    email: null,
    category: null,
-   description: '',
+   description: null,
    priority: null,
 })
 
