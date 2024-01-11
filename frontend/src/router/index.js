@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import TicketForm from '/src/views/TicketForm.vue'
-import TicketList from '/src/views/TicketList.vue'
 
 const routes = [
    {
@@ -10,7 +9,12 @@ const routes = [
    },
    {
       path: '/list',
-      component: TicketList,
+      component: () => import('/src/views/TicketList.vue'),
+   },
+   {
+      path: '/recap/:id',
+      component: () => import('/src/components/TicketRecap.vue'),
+      props: true,
    },
 ]
 

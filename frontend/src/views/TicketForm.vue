@@ -37,6 +37,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import router from '/src/router'
 
 const formData = ref({
    email: null,
@@ -56,6 +57,7 @@ const submitForm = async () => {
    })
    const createdTicket = await response.json()
    console.log('createdTicket', createdTicket)
+   router.push(`/recap/${createdTicket.id}`)
 }
 
 const isEmailValid = computed(() => {

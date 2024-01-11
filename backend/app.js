@@ -9,15 +9,23 @@ app.use(express.json())
 
 app.get('/api/ticket', async (req, res) => {
    const ticketList = await prisma.Ticket.findMany({})
-   console.log('ticketList', ticketList)
+   console.log('GET /api/ticket', ticketList)
    res.send(ticketList)
+})
+
+app.get('/api/ticket/:id', async (req, res) => {
+   const ticket = await prisma.Ticket.findUnique({
+      where: { id: parseInt(req.params.id) }
+   })
+   console.log(`GET /api/ticket ${ticket.id}`, ticket)
+   res.send(ticket)
 })
 
 app.post('/api/ticket', async (req, res) => {
    const ticket = await prisma.Ticket.create({
       data: req.body
    })
-   console.log('created', ticket)
+   console.log('POST /api/ticket', ticket)
    res.send(ticket)
 })
 
