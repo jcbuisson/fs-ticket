@@ -19,13 +19,13 @@
 import { ref, onMounted } from 'vue'
 import TicketCard from '/src/components/TicketCard.vue'
 import router from '/src/router'
+import { getAllTickets } from '../use/useTickets'
 
 const ticketList = ref([])
 const selectedTicketId = ref()
 
 onMounted(async () => {
-   const response = await fetch('/api/ticket')
-   ticketList.value = await response.json()
+   ticketList.value = await getAllTickets()
 })
 
 const onClick = (ticketId) => {

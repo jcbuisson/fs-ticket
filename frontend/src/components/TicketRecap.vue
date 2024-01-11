@@ -20,8 +20,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { CATEGORIES, PRIORITIES } from '../constants'
+import { asyncTicket } from '../use/useTickets'
 
 const props = defineProps({
    ticketId: {
@@ -32,8 +33,9 @@ const props = defineProps({
 
 const ticket = ref({})
 
-onMounted(async () => {
-   const response = await fetch(`/api/ticket/${props.ticketId}`)
-   ticket.value = await response.json()
+watch(() => props.ticketId, async () => {
+   ticket.value = await asyncTicket(props.ticketId)
+}, {
+   immediate: true
 })
 </script>
