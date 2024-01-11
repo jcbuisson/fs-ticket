@@ -8,13 +8,17 @@ const routes = [
       component: TicketForm,
    },
    {
-      path: '/list',
+      path: '/tickets',
       component: () => import('/src/views/TicketList.vue'),
    },
    {
-      path: '/recap/:id',
+      path: '/recap/:ticketId',
       component: () => import('/src/components/TicketRecap.vue'),
       props: true,
+   },
+   {
+      path: "/:catchAll(.*)",
+      redirect: '/',
    },
 ]
 
