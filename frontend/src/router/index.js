@@ -10,6 +10,13 @@ const routes = [
    {
       path: '/tickets',
       component: () => import('/src/views/TicketList.vue'),
+      children: [
+         {
+            path: ':ticketId',
+            component: () => import('/src/components/TicketDetail.vue'),
+            props: true,
+         },
+      ],
    },
    {
       path: '/recap/:ticketId',

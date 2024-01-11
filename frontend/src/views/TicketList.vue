@@ -1,9 +1,18 @@
 <template>
    <div class="max-w-xl mx-auto mt-8">
-      <template v-for="ticket in ticketList" class="p-4">
-         <TicketCard :ticketId="ticket.id"></TicketCard>
-      </template>
+      <div class="flex">
+         <!-- list -->
+         <div>
+            <template v-for="ticket in ticketList" class="p-4">
+               <TicketCard :ticketId="ticket.id"></TicketCard>
+            </template>
+         </div>
+
+         <!-- detail -->
+         <router-view></router-view>
+      </div>
    </div>
+
 </template>
 
 <script setup>

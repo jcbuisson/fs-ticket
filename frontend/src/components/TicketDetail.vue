@@ -1,7 +1,5 @@
 <template>
-   <div class="max-w-md mx-auto mt-8">
-
-      <p class="my-4 p-2 w-full text-lg">Votre demande a bien été enregistrée</p>
+   <div class="p-6">
 
       <label class=" mt-4 text-sm font-medium text-gray-700">Identifiant</label>
       <p class="mt-1 p-2 border rounded-md w-full">{{ ticket.id }}</p>
@@ -18,7 +16,6 @@
       <label class="block mt-4 text-sm font-medium text-gray-700">Priorité</label>
       <p class="mt-1 p-2 border rounded-md w-full">{{ ticket.priority }}</p>
 
-      <a href="/" class="mt-4 text-blue-500 hover:underline">Saisir une autre demande</a>
    </div>
 </template>
 
