@@ -24,7 +24,7 @@ import { ref, onMounted } from 'vue'
 import { CATEGORIES, PRIORITIES } from '../constants'
 
 const props = defineProps({
-   id: {
+   ticketId: {
       type: Number,
       required: true,
    },
@@ -33,7 +33,7 @@ const props = defineProps({
 const ticket = ref({})
 
 onMounted(async () => {
-   const response = await fetch(`/api/ticket/${props.id}`)
+   const response = await fetch(`/api/ticket/${props.ticketId}`)
    ticket.value = await response.json()
 })
 </script>
