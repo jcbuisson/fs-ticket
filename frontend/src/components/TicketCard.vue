@@ -1,7 +1,8 @@
 <template>
-   <div class="max-w-sm rounded overflow-hidden shadow-lg" :class="{'bg-gray-200': selected}">
+   <div class="w-80 rounded shadow-lg" :class="{'bg-gray-200': selected}">
       <div class="px-6 py-4">
          <div class="font-bold text-xl mb-2">Ticket #{{ ticket.id }}</div>
+         <div class="text-lg mb-2">Créé le {{ format(new Date(ticket.created_at || '1970-01-01'), 'dd/MM/yyyy HH:mm') }}</div>
          <p class="text-gray-700 text-sm">
             {{ ticket.description }}
          </p>
@@ -18,6 +19,8 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import { format } from 'date-fns'
+
 import { CATEGORIES, PRIORITIES } from '../constants'
 import { asyncTicket } from '../use/useTickets'
 

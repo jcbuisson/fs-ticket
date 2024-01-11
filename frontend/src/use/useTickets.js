@@ -1,13 +1,17 @@
 
 const id2ticket = {}
-
+let ticketListComplete = false
 
 export async function getAllTickets() {
+   if (ticketListComplete) {
+      return id2ticket.values
+   }
    const response = await fetch('/api/ticket')
    const ticketList = await response.json()
    for (const ticket of ticketList) {
       id2ticket[ticket.id] = ticket
    }
+   ticketListComplete = true
    return ticketList
 }
 
