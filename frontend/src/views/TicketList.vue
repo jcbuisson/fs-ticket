@@ -4,7 +4,7 @@
          <!-- list -->
          <div>
             <template v-for="ticket in ticketList" class="p-4">
-               <TicketCard :ticketId="ticket.id"></TicketCard>
+               <TicketCard :ticketId="ticket.id" @click="onClick(ticket.id)" :selected="ticket.id === selectedTicketId"></TicketCard>
             </template>
          </div>
 
@@ -18,11 +18,18 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import TicketCard from '/src/components/TicketCard.vue'
+import router from '/src/router'
 
 const ticketList = ref([])
+const selectedTicketId = ref()
 
 onMounted(async () => {
    const response = await fetch('/api/ticket')
    ticketList.value = await response.json()
 })
+
+const onClick = (ticketId) => {
+   selectedTicketId.value = ticketId
+   router.push(`/tickets/${ticketId}`)
+}
 </script>
