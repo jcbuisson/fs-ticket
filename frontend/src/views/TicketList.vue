@@ -25,6 +25,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import { CATEGORIES, PRIORITIES } from '../constants'
 
 const ticketList = ref([])
 
@@ -37,17 +38,4 @@ onMounted(async () => {
    })
    ticketList.value = await response.json()
 })
-
-const CATEGORIES = {
-   furniture: "Mobilier",
-   computer: "Informatique",
-   other: "Autre",
-}
-
-const PRIORITIES = {
-   low: "Basse",
-   normal: "Normale",
-   high: "Haute",
-}
-
 </script>
