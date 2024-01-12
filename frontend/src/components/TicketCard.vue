@@ -1,7 +1,8 @@
 <template>
-   <div class="max-w-sm rounded overflow-hidden shadow-lg" :class="{'bg-gray-200': selected}">
+   <div class="w-80 rounded shadow-lg cursor-pointer" :class="{'bg-gray-200': selected}">
       <div class="px-6 py-4">
          <div class="font-bold text-xl mb-2">Ticket #{{ ticket.id }}</div>
+         <div class="mb-2">Créé le {{ formatDate(ticket.created_at) }}</div>
          <p class="text-gray-700 text-sm">
             {{ ticket.description }}
          </p>
@@ -39,4 +40,8 @@ watch(() => props.ticketId, async () => {
 }, {
    immediate: true
 })
+function formatDate(isoDate) {
+   if (!isoDate) return ''
+   return format(new Date(isoDate), 'dd/MM/yyyy HH:mm')
+}
 </script>
