@@ -18,7 +18,6 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-import TicketCard from '/src/components/TicketCard.vue'
 import router from '/src/router'
 import { allTickets } from '../use/useTickets'
 import TicketCard from '/src/components/TicketCard.vue'

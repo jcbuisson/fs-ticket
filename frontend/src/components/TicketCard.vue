@@ -42,6 +42,7 @@ watch(() => props.ticketId, async () => {
 }, {
    immediate: true
 })
+
 function formatDate(isoDate) {
    if (!isoDate) return ''
    return format(new Date(isoDate), 'dd/MM/yyyy HH:mm')
