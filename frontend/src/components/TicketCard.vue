@@ -1,8 +1,8 @@
 <template>
-   <div class="w-80 rounded shadow-lg cursor-pointer" :class="{'bg-gray-200': selected}">
+   <div class="w-80 rounded shadow-lg cursor-wait" :class="{'bg-gray-200': selected}">
       <div class="px-6 py-4">
          <div class="font-bold text-xl mb-2">Ticket #{{ ticket.id }}</div>
-         <p class="text-gray-700 text-sm">
+         <p class="text-gray-700 text-sm text-ellipsis">
             {{ ticket.description }}
          </p>
       </div>
