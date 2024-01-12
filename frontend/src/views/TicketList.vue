@@ -1,9 +1,9 @@
 <template>
    <div class="m-4">
       <ul class="flex">
-         <li><a href="#" @click="toggleLowPriority" :class="{ 'opacity-20': !visiblePriorities.has('low') }" class="bg-yellow-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Faible</a></li>
-         <li><a href="#" @click="toggleNormalPriority" :class="{ 'opacity-20': !visiblePriorities.has('normal') }" class="bg-orange-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Normale</a></li>
-         <li><a href="#" @click="toggleHighPriority" :class="{ 'opacity-20': !visiblePriorities.has('high') }" class="bg-red-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Élevée</a></li>
+         <li><a href="#" @click="togglePriority('low')" :class="{ 'opacity-20': !filteredPriorities.has('low') }" class="bg-yellow-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Faible</a></li>
+         <li><a href="#" @click="togglePriority('normal')" :class="{ 'opacity-20': !filteredPriorities.has('normal') }" class="bg-orange-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Normale</a></li>
+         <li><a href="#" @click="togglePriority('high')" :class="{ 'opacity-20': !filteredPriorities.has('high') }" class="bg-red-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Élevée</a></li>
       </ul>
 
       <ul class="flex">
@@ -38,25 +38,30 @@ const onClick = (ticketId) => {
    selectedTicketId.value = ticketId
    router.push(`/tickets/${ticketId}`)
 }
-const toggleLowPriority = () => visiblePriorities.value.has('low') ? visiblePriorities.value.delete('low') : visiblePriorities.value.add('low')
-const toggleNormalPriority = () => visiblePriorities.value.has('normal') ? visiblePriorities.value.delete('normal') : visiblePriorities.value.add('normal')
-const toggleHighPriority = () => visiblePriorities.value.has('high') ? visiblePriorities.value.delete('high') : visiblePriorities.value.add('high')
 
-const visiblePriorities = ref(new Set(['low', 'normal', 'high']))
+const filteredPriorities = ref(new Set(['low', 'normal', 'high']))
+const togglePriority = (priority) => {
+   if (filteredPriorities.value.has(priority)) {
+      filteredPriorities.value.delete(priority)
+   } else {
+      filteredPriorities.value.add(priority)
+   }
+   router.push(`/tickets`)
+}
 
 const filteredCategories = ref(new Set(['furniture', 'computer', 'other']))
 const toggleCategory = (category) => {
-   console.log('category', category)
    if (filteredCategories.value.has(category)) {
-      visiblePriorities.value.delete(category)
+      filteredCategories.value.delete(category)
    } else {
-      visiblePriorities.value.add(category)
+      filteredCategories.value.add(category)
    }
+   router.push(`/tickets`)
 }
 
 
 const visibleTickets = computed(() => allTickets.value
-   .filter(ticket => visiblePriorities.value.has(ticket.priority))
+   .filter(ticket => filteredPriorities.value.has(ticket.priority))
    .filter(ticket => filteredCategories.value.has(ticket.category))
 )
 </script>
