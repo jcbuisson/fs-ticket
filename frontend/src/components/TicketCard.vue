@@ -19,6 +19,8 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import { format } from 'date-fns'
+
 import { CATEGORIES, PRIORITIES } from '../constants'
 import { asyncTicket } from '../use/useTickets'
 
