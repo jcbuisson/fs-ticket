@@ -1,5 +1,5 @@
 <template>
-   <div class="w-80 rounded shadow-lg" :class="{'bg-gray-200': selected}">
+   <div class="w-80 rounded shadow-lg cursor-pointer" :class="{'bg-gray-200': selected}">
       <div class="px-6 py-4">
          <div class="font-bold text-xl mb-2">Ticket #{{ ticket.id }}</div>
          <div class="text-lg mb-2">Créé le {{ format(new Date(ticket.created_at || '1970-01-01'), 'dd/MM/yyyy HH:mm') }}</div>
