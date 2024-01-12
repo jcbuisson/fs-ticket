@@ -6,6 +6,12 @@
          <li><a href="#" @click="toggleHighPriority" :class="{ 'opacity-20': !visiblePriorities.has('high') }" class="bg-red-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Élevée</a></li>
       </ul>
 
+      <ul class="flex">
+         <li><a href="#" @click="toggleCategory('furniture')" :class="{ 'opacity-20': !filteredCategories.has('furniture') }" class="bg-yellow-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Mobilier</a></li>
+         <li><a href="#" @click="toggleCategory('computer')" :class="{ 'opacity-20': !filteredCategories.has('computer') }" class="bg-orange-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Informatique</a></li>
+         <li><a href="#" @click="toggleCategory('other')" :class="{ 'opacity-20': !filteredCategories.has('other') }" class="bg-red-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Autre</a></li>
+      </ul>
+
       <div class="flex">
          <!-- list -->
          <div>
@@ -38,5 +44,19 @@ const toggleHighPriority = () => visiblePriorities.value.has('high') ? visiblePr
 
 const visiblePriorities = ref(new Set(['low', 'normal', 'high']))
 
-const visibleTickets = computed(() => allTickets.value.filter(ticket => visiblePriorities.value.has(ticket.priority)))
+const filteredCategories = ref(new Set(['furniture', 'computer', 'other']))
+const toggleCategory = (category) => {
+   console.log('category', category)
+   if (filteredCategories.value.has(category)) {
+      visiblePriorities.value.delete(category)
+   } else {
+      visiblePriorities.value.add(category)
+   }
+}
+
+
+const visibleTickets = computed(() => allTickets.value
+   .filter(ticket => visiblePriorities.value.has(ticket.priority))
+   .filter(ticket => filteredCategories.value.has(ticket.category))
+)
 </script>
