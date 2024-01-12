@@ -1,18 +1,17 @@
 <template>
-   <div class="max-w-xl mx-auto mt-8">
+   <div class="m-4">
       <div class="flex">
          <!-- list -->
          <div>
             <template v-for="ticket in ticketList" class="p-4">
-               <TicketCard :ticketId="ticket.id" @click="onClick(ticket.id)" :selected="ticket.id == selectedTicketId"></TicketCard>
+               <TicketCard :ticketId="ticket.id" @click="onClick(ticket.id)" :selected="ticket.id === selectedTicketId"></TicketCard>
             </template>
          </div>
 
          <!-- detail -->
-         <router-view></router-view>
+         <router-view class="w-full"></router-view>
       </div>
    </div>
-
 </template>
 
 <script setup>
