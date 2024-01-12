@@ -22,8 +22,6 @@ import TicketCard from '/src/components/TicketCard.vue'
 import router from '/src/router'
 import { allTickets } from '../use/useTickets'
 
-const ticketList = ref([])
-
 const route = useRoute()
 const selectedTicketId = ref(route.params.ticketId)
 
