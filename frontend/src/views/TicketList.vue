@@ -3,7 +3,7 @@
       <div class="flex">
          <!-- list -->
          <div>
-            <template v-for="ticket in allTickets" class="p-4">
+            <template v-for="ticket in allTickets">
                <TicketCard :ticketId="ticket.id" @click="onClick(ticket.id)" :selected="ticket.id === selectedTicketId"></TicketCard>
             </template>
          </div>
@@ -15,12 +15,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import TicketCard from '/src/components/TicketCard.vue'
 import router from '/src/router'
 import { allTickets } from '../use/useTickets'
 
-const ticketList = ref([])
 const selectedTicketId = ref()
 
 const onClick = (ticketId) => {
