@@ -4,7 +4,7 @@ let ticketListComplete = false
 
 export async function getAllTickets() {
    if (ticketListComplete) {
-      return id2ticket.values
+      return Object.values(id2ticket)
    }
    const response = await fetch('/api/ticket')
    const ticketList = await response.json()
