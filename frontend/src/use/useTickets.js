@@ -1,25 +1,30 @@
 
-const id2ticket = {}
-let ticketListComplete = false
+import { ref, computed } from 'vue'
 
-export async function getAllTickets() {
-   if (ticketListComplete) {
-      return Object.values(id2ticket)
+
+const id2ticket = ref({})
+const ticketListComplete = ref(false)
+
+
+export const allTickets = computed(() => {
+   if (ticketListComplete.value) {
+      return Object.values(id2ticket.value)
    }
-   const response = await fetch('/api/ticket')
-   const ticketList = await response.json()
-   for (const ticket of ticketList) {
-      id2ticket[ticket.id] = ticket
-   }
-   ticketListComplete = true
-   return ticketList
-}
+   fetch('/api/ticket').then(response => response.json()).then(ticketList => {
+      for (const ticket of ticketList) {
+         id2ticket.value[ticket.id] = ticket
+      }
+      ticketListComplete.value = true
+   })
+   return {}
+})
+
 
 export async function asyncTicket(ticketId) {
-   if (id2ticket[ticketId] === undefined) {
+   if (id2ticket.value[ticketId] === undefined) {
       const response = await fetch(`/api/ticket/${ticketId}`)
       const ticket = await response.json()
-      id2ticket[ticket.id] = ticket
+      id2ticket.value[ticket.id] = ticket
    }
-   return id2ticket[ticketId]
+   return id2ticket.value[ticketId]
 }
