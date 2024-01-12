@@ -4,7 +4,7 @@
          <!-- list -->
          <div>
             <template v-for="ticket in ticketList" class="p-4">
-               <TicketCard :ticketId="ticket.id" @click="onClick(ticket.id)" :selected="ticket.id === selectedTicketId"></TicketCard>
+               <TicketCard :ticketId="ticket.id" @click="onClick(ticket.id)" :selected="ticket.id == selectedTicketId"></TicketCard>
             </template>
          </div>
 
