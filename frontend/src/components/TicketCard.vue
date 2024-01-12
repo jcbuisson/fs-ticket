@@ -19,6 +19,8 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import { format } from 'date-fns'
+
 import { CATEGORIES, PRIORITIES } from '../constants'
 import { asyncTicket } from '../use/useTickets'
 
@@ -40,6 +42,7 @@ watch(() => props.ticketId, async () => {
 }, {
    immediate: true
 })
+
 function formatDate(isoDate) {
    if (!isoDate) return ''
    return format(new Date(isoDate), 'dd/MM/yyyy HH:mm')
