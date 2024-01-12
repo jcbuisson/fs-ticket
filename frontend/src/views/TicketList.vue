@@ -1,5 +1,5 @@
 <template>
-   <div class="max-w-xl mx-auto mt-8">
+   <div class="m-4">
       <div class="flex">
          <!-- list -->
          <div>
@@ -9,10 +9,9 @@
          </div>
 
          <!-- detail -->
-         <router-view></router-view>
+         <router-view class="w-full"></router-view>
       </div>
    </div>
-
 </template>
 
 <script setup>
