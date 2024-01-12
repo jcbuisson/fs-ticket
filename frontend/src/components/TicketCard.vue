@@ -2,6 +2,7 @@
    <div class="w-80 rounded shadow-lg cursor-wait" :class="{'bg-gray-200': selected}">
       <div class="px-6 py-4">
          <div class="font-bold text-xl mb-2">Ticket #{{ ticket.id }}</div>
+         <div class="text-lg mb-2">Créé le {{ createdAt }}</div>
          <p class="text-gray-700 text-sm text-ellipsis">
             {{ ticket.description }}
          </p>
@@ -36,5 +37,10 @@ const ticket = ref({})
 onMounted(async () => {
    const response = await fetch(`/api/ticket/${props.ticketId}`)
    ticket.value = await response.json()
+})
+
+const createdAt = computed(() => {
+   if (!ticket.value) return ''
+   return format(new Date(ticket.value.created_at, 'dd/MM/yyyy HH:mm')
 })
 </script>
