@@ -2,7 +2,7 @@
    <div class="w-80 rounded shadow-lg cursor-wait" :class="{'bg-gray-200': selected}">
       <div class="px-6 py-4">
          <div class="font-bold text-xl mb-2">Ticket #{{ ticket.id }}</div>
-         <div class="text-lg mb-2">Créé le {{ createdAt }}</div>
+         <div class="mb-2">Créé le {{ formatDate(ticket.created_at) }}</div>
          <p class="text-gray-700 text-sm text-ellipsis">
             {{ ticket.description }}
          </p>
@@ -18,8 +18,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { format } from 'date-fns'
+
 import { CATEGORIES, PRIORITIES } from '../constants'
+
 
 const props = defineProps({
    ticketId: {
@@ -39,8 +42,8 @@ onMounted(async () => {
    ticket.value = await response.json()
 })
 
-const createdAt = computed(() => {
-   if (!ticket.value) return ''
-   return format(new Date(ticket.value.created_at, 'dd/MM/yyyy HH:mm')
-})
+function formatDate(isoDate) {
+   if (!isoDate) return ''
+   return format(new Date(isoDate), 'dd/MM/yyyy HH:mm')
+}
 </script>
