@@ -16,11 +16,16 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+
 import TicketCard from '/src/components/TicketCard.vue'
 import router from '/src/router'
 import { allTickets } from '../use/useTickets'
+import TicketCard from '/src/components/TicketCard.vue'
 
-const selectedTicketId = ref()
+
+const route = useRoute()
+const selectedTicketId = ref(route.params.ticketId)
 
 const onClick = (ticketId) => {
    selectedTicketId.value = ticketId
