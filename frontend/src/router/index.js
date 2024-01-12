@@ -14,7 +14,8 @@ const routes = [
    {
       path: '/recap/:ticketId',
       component: () => import('/src/components/TicketRecap.vue'),
-      props: true,
+      // props: true,
+      props: (route) => ({ ticketId: parseInt(route.params.ticketId) })
    },
    {
       path: "/:catchAll(.*)",
