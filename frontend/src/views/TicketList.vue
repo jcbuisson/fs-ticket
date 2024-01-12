@@ -1,15 +1,15 @@
 <template>
    <div class="m-4">
       <ul class="flex">
-         <li><a href="#" @click="toggleLowPriority" :class="{ 'opacity-20': !isLowPriorityVisible }" class="bg-yellow-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Faible</a></li>
-         <li><a href="#" @click="toggleNormalPriority" :class="{ 'opacity-20': !isNormalPriorityVisible }" class="bg-orange-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Normale</a></li>
-         <li><a href="#" @click="toggleHighPriority" :class="{ 'opacity-20': !isHighPriorityVisible }" class="bg-red-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Élevée</a></li>
+         <li><a href="#" @click="toggleLowPriority" :class="{ 'opacity-20': !visiblePriorities.has('low') }" class="bg-yellow-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Faible</a></li>
+         <li><a href="#" @click="toggleNormalPriority" :class="{ 'opacity-20': !visiblePriorities.has('normal') }" class="bg-orange-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Normale</a></li>
+         <li><a href="#" @click="toggleHighPriority" :class="{ 'opacity-20': !visiblePriorities.has('high') }" class="bg-red-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Élevée</a></li>
       </ul>
 
       <div class="flex">
          <!-- list -->
          <div>
-            <template v-for="ticket in allTickets" class="p-4">
+            <template v-for="ticket in visibleTickets" class="p-4">
                <TicketCard :ticketId="ticket.id" @click="onClick(ticket.id)" :selected="ticket.id === selectedTicketId"></TicketCard>
             </template>
          </div>
@@ -21,21 +21,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import TicketCard from '/src/components/TicketCard.vue'
 import router from '/src/router'
 import { allTickets } from '../use/useTickets'
 
 const selectedTicketId = ref()
-const isLowPriorityVisible = ref(true)
-const isNormalPriorityVisible = ref(true)
-const isHighPriorityVisible = ref(true)
 
 const onClick = (ticketId) => {
    selectedTicketId.value = ticketId
    router.push(`/tickets/${ticketId}`)
 }
-const toggleLowPriority = () => isLowPriorityVisible.value = !isLowPriorityVisible.value
-const toggleNormalPriority = () => isNormalPriorityVisible.value = !isNormalPriorityVisible.value
-const toggleHighPriority = () => isHighPriorityVisible.value = !isHighPriorityVisible.value
+const toggleLowPriority = () => visiblePriorities.value.has('low') ? visiblePriorities.value.delete('low') : visiblePriorities.value.add('low')
+const toggleNormalPriority = () => visiblePriorities.value.has('normal') ? visiblePriorities.value.delete('normal') : visiblePriorities.value.add('normal')
+const toggleHighPriority = () => visiblePriorities.value.has('high') ? visiblePriorities.value.delete('high') : visiblePriorities.value.add('high')
+
+const visiblePriorities = ref(new Set(['low', 'normal', 'high']))
+
+const visibleTickets = computed(() => allTickets.value.filter(ticket => visiblePriorities.value.has(ticket.priority)))
 </script>
