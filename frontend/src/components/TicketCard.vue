@@ -18,6 +18,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { CATEGORIES, PRIORITIES } from '../constants'
 
 const props = defineProps({
    ticketId: {
@@ -36,16 +37,4 @@ onMounted(async () => {
    const response = await fetch(`/api/ticket/${props.ticketId}`)
    ticket.value = await response.json()
 })
-
-const CATEGORIES = {
-   furniture: "Mobilier",
-   computer: "Informatique",
-   other: "Autre",
-}
-
-const PRIORITIES = {
-   low: "Basse",
-   normal: "Normale",
-   high: "Haute",
-}
 </script>
