@@ -9,7 +9,7 @@
          </div>
 
          <!-- detail -->
-         <router-view></router-view>
+         <router-view class="w-full"></router-view>
       </div>
    </div>
 
