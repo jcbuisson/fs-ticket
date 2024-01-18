@@ -23,7 +23,7 @@ import { ref, watch } from 'vue'
 import { format } from 'date-fns'
 
 import { CATEGORIES, PRIORITIES } from '../constants'
-import { asyncTicket } from '../use/useTickets'
+import { asyncTicket, ticketOfId } from '../use/useTickets'
 
 const props = defineProps({
    ticketId: {
@@ -36,13 +36,15 @@ const props = defineProps({
    },
 })
 
-const ticket = ref({})
+// const ticket = ref({})
+const ticket = ticketOfId.value(props.ticketId)
 
-watch(() => props.ticketId, async () => {
-   ticket.value = await asyncTicket(props.ticketId)
-}, {
-   immediate: true
-})
+
+// watch(() => props.ticketId, async () => {
+//    ticket.value = await asyncTicket(props.ticketId)
+// }, {
+//    immediate: true
+// })
 
 function formatDate(isoDate) {
    if (!isoDate) return ''
