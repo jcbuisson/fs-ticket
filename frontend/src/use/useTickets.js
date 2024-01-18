@@ -1,9 +1,9 @@
-import { useSessionStorage } from '@vueuse/core'
-import { computed } from 'vue'
+
+import { ref, computed } from 'vue'
 
 
-const id2ticket = useSessionStorage('id2ticket', {})
-const ticketListComplete = useSessionStorage('ticket-list-complete', false)
+const id2ticket = ref({})
+const ticketListComplete = ref(false)
 
 
 export const allTickets = computed(() => {
@@ -19,6 +19,7 @@ export const allTickets = computed(() => {
    return {}
 })
 
+
 export async function asyncTicket(ticketId) {
    if (id2ticket.value[ticketId] === undefined) {
       const response = await fetch(`/api/ticket/${ticketId}`)
@@ -27,3 +28,11 @@ export async function asyncTicket(ticketId) {
    }
    return id2ticket.value[ticketId]
 }
+
+export const ticketOfId = computed(() => (id) => {
+   const ticket = id2ticket.value[id]
+   if (ticket) return ticket
+   fetch(`/api/ticket/${id}`).then(response => response.json()).then(ticket => {
+      id2ticket.value[ticket.id] = ticket
+   })
+})
