@@ -1,9 +1,9 @@
-import { useSessionStorage } from '@vueuse/core'
+import { useLocalStorage } from '@vueuse/core'
 import { computed } from 'vue'
 
 
-const id2ticket = useSessionStorage('id2ticket', {})
-const ticketListComplete = useSessionStorage('ticket-list-complete', false)
+const id2ticket = useLocalStorage('id2ticket', {})
+const ticketListComplete = useLocalStorage('ticket-list-complete', false)
 
 
 export const allTickets = computed(() => {
