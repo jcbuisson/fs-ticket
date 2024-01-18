@@ -41,7 +41,6 @@ import TicketCard from '/src/components/TicketCard.vue'
 const route = useRoute()
 const selectedTicketId = ref(route.params.ticketId)
 
-console.log('allTickets', allTickets.value)
 
 const onClick = (ticketId) => {
    selectedTicketId.value = ticketId
