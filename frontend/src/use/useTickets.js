@@ -1,9 +1,9 @@
+import { useLocalStorage } from '@vueuse/core'
+import { computed } from 'vue'
 
-import { ref, computed } from 'vue'
 
-
-const id2ticket = ref({})
-const ticketListComplete = ref(false)
+const id2ticket = useLocalStorage('id2ticket', {})
+const ticketListComplete = useLocalStorage('ticket-list-complete', false)
 
 
 export const allTickets = computed(() => {
@@ -16,9 +16,8 @@ export const allTickets = computed(() => {
       }
       ticketListComplete.value = true
    })
-   return {}
+   return []
 })
-
 
 export async function asyncTicket(ticketId) {
    if (id2ticket.value[ticketId] === undefined) {
@@ -36,3 +35,16 @@ export const ticketOfId = computed(() => (id) => {
       id2ticket.value[ticket.id] = ticket
    })
 })
+
+export async function createTicket(formData) {
+   const response = await fetch('/api/ticket', {
+      method: 'POST',
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+   })
+   const createdTicket = await response.json()
+   id2ticket.value[createdTicket.id] = createdTicket
+   return createdTicket
+}
