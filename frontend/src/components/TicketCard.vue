@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { format } from 'date-fns'
 
 import { CATEGORIES, PRIORITIES } from '../constants'
@@ -36,7 +36,7 @@ const props = defineProps({
 })
 
 // const ticket = ref({})
-const ticket = ticketOfId.value(props.ticketId)
+const ticket = computed(() => ticketOfId.value(props.ticketId))
 
 // watch(() => props.ticketId, async () => {
 //    ticket.value = await asyncTicket(props.ticketId)
