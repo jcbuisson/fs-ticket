@@ -1,9 +1,7 @@
-// import { useLocalStorage } from '@vueuse/core'
 import { useLocalStorage } from '@vueuse/core'
 import { computed } from 'vue'
 
 
-// const id2ticket = useLocalStorage('id2ticket', {})
 const id2ticket = useLocalStorage('id2ticket', {})
 const ticketListComplete = useLocalStorage('ticket-list-complete', false)
 
