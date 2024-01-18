@@ -38,6 +38,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import router from '/src/router'
+import { createTicket } from '/src/use/useTickets'
 
 const formData = ref({
    email: null,
@@ -48,15 +49,7 @@ const formData = ref({
 
 const submitForm = async () => {
    console.log('Form submitted with data:', formData.value)
-   const response = await fetch('/api/ticket', {
-      method: 'POST',
-      headers: {
-         "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData.value),
-   })
-   const createdTicket = await response.json()
-   console.log('createdTicket', createdTicket)
+   const createdTicket = await createTicket(formData.value)
    router.push(`/recap/${createdTicket.id}`)
 }
 

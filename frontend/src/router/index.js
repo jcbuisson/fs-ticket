@@ -8,6 +8,10 @@ const routes = [
       component: TicketForm,
    },
    {
+      path: '/signin',
+      component: () => import('/src/views/Signin.vue'),
+   },
+   {
       path: '/tickets',
       component: () => import('/src/views/TicketList.vue'),
       children: [

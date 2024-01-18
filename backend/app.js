@@ -1,11 +1,18 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client'
+import jwt from 'jsonwebtoken'
 
 const app = express()
 const prisma = new PrismaClient()
 
 
 app.use(express.json())
+
+app.post('/api/auth', async (req, res) => {
+   const { email } = req.body
+   const token = jwt.sign({ user: email }, "MYSECRET")
+   res.cookie('sessionId', token).send('ok')
+})
 
 app.get('/api/ticket', async (req, res) => {
    const ticketList = await prisma.Ticket.findMany({})

@@ -27,3 +27,15 @@ export async function asyncTicket(ticketId) {
    }
    return id2ticket.value[ticketId]
 }
+
+export async function createTicket(formData) {
+   const response = await fetch('/api/ticket', {
+      method: 'POST',
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+   })
+   const createdTicket = await response.json()
+   return createdTicket
+}
