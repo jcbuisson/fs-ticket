@@ -39,7 +39,6 @@ const props = defineProps({
 // const ticket = ref({})
 const ticket = ticketOfId.value(props.ticketId)
 
-
 // watch(() => props.ticketId, async () => {
 //    ticket.value = await asyncTicket(props.ticketId)
 // }, {
