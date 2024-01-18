@@ -3,6 +3,7 @@
       <div class="px-6 py-4">
          <div class="font-bold text-xl mb-2">Ticket #{{ ticket.id }}</div>
          <div class="mb-2">Créé le {{ formatDate(ticket.created_at) }}</div>
+         <div class="mb-2">Créé le {{ formatDate(ticket.created_at) }}</div>
          <p class="text-gray-700 text-sm">
             {{ ticket.description }}
          </p>
@@ -22,7 +23,7 @@ import { ref, watch } from 'vue'
 import { format } from 'date-fns'
 
 import { CATEGORIES, PRIORITIES } from '../constants'
-import { asyncTicket } from '../use/useTickets'
+import { asyncTicket, ticketOfId } from '../use/useTickets'
 
 const props = defineProps({
    ticketId: {
@@ -35,13 +36,14 @@ const props = defineProps({
    },
 })
 
-const ticket = ref({})
+// const ticket = ref({})
+const ticket = ticketOfId.value(props.ticketId)
 
-watch(() => props.ticketId, async () => {
-   ticket.value = await asyncTicket(props.ticketId)
-}, {
-   immediate: true
-})
+// watch(() => props.ticketId, async () => {
+//    ticket.value = await asyncTicket(props.ticketId)
+// }, {
+//    immediate: true
+// })
 
 function formatDate(isoDate) {
    if (!isoDate) return ''
