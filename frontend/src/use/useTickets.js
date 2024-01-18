@@ -16,7 +16,7 @@ export const allTickets = computed(() => {
       }
       ticketListComplete.value = true
    })
-   return {}
+   return []
 })
 
 export async function asyncTicket(ticketId) {
@@ -45,5 +45,6 @@ export async function createTicket(formData) {
       body: JSON.stringify(formData),
    })
    const createdTicket = await response.json()
+   id2ticket.value[createdTicket.id] = createdTicket
    return createdTicket
 }
