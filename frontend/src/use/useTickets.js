@@ -17,7 +17,6 @@ export const allTickets = computed(() => {
    return []
 })
 
-
 export async function asyncTicket(ticketId) {
    let ticket = id2ticket.value[ticketId]
    if (ticket) return ticket
