@@ -29,6 +29,10 @@ app.post('/api/ticket', async (req, res) => {
    res.send(ticket)
 })
 
+app.post('signin', async (req, res) => {
+   
+})
+
 app.listen(3000, function() {
    console.log('listening to port 3000')
 })
