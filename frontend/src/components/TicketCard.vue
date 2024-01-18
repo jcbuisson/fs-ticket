@@ -3,7 +3,6 @@
       <div class="px-6 py-4">
          <div class="font-bold text-xl mb-2">Ticket #{{ ticket.id }}</div>
          <div class="mb-2">Créé le {{ formatDate(ticket.created_at) }}</div>
-         <div class="mb-2">Créé le {{ formatDate(ticket.created_at) }}</div>
          <p class="text-gray-700 text-sm">
             {{ ticket.description }}
          </p>
