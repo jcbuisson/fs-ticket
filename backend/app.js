@@ -10,8 +10,10 @@ app.use(express.json())
 
 app.post('/api/auth', async (req, res) => {
    const { email } = req.body
-   const token = jwt.sign({ user: email }, "MYSECRET")
-   res.cookie('sessionId', token).send('ok')
+   const token = jwt.sign({ email }, "MYSECRET")
+   console.log('token', token)
+   res.cookie('sessionId', token)
+   res.send('ok')
 })
 
 app.get('/api/ticket', async (req, res) => {

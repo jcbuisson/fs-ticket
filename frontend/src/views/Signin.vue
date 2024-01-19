@@ -23,6 +23,14 @@ import router from '/src/router'
 const email = ref()
 
 function signin() {
-   
+   fetch('/api/auth', {
+      method: 'POST',
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+         email: email.value,
+      }),
+   })
 }
 </script>
